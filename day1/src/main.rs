@@ -2,7 +2,7 @@ fn main() {
     println!("Hello, world!");
     println!("SILVER: The example solution is : {}", day1("example.txt"));
     println!("SILVER: The solution is : {}", day1("input.txt"));
-    println!("GOLD: The example solution is : {}", day2("example2.txt"));
+    println!("GOLD: The example solution is : {}", day2("example.txt"));
     println!("GOLD: The solution is : {}", day2("input.txt"));
 }
 
