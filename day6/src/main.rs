@@ -48,11 +48,7 @@ fn read_gold(loc: &str) -> (u64, u64) {
 fn solve_eq(length_of_race: u64, goal_dist: u64) -> (f64, f64) {
     let dist = ((length_of_race.pow(2) - 4 * goal_dist) as f64).sqrt();
     let x0 = (length_of_race as f64 - dist) / 2.;
-    let mut x1 = (length_of_race as f64 + dist) / 2.;
-
-    if x1.fract() == 0. {
-        x1 -= 1.;
-    }
+    let x1 = (length_of_race as f64 + dist) / 2.;
 
     (x0, x1)
 }
@@ -61,7 +57,7 @@ fn silver(loc: &str) -> u64 {
     read_silver(loc)
         .into_iter()
         .map(|(t, d)| solve_eq(t, d))
-        .map(|(x0, x1)| (x1.ceil() - x0.ceil()) as u64)
+        .map(|(x0, x1)| (x1.ceil() - x0.floor() - 1.) as u64)
         .product()
 }
 
