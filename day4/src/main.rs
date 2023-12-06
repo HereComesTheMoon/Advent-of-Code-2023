@@ -2,10 +2,10 @@ use std::{collections::HashSet, fs::read_to_string};
 
 fn main() {
     println!("Hello, world!");
-    println!("SILVER: The example solution is : {}", day1("example.txt"));
-    println!("SILVER: The solution is : {}", day1("input.txt"));
-    println!("GOLD: The example solution is : {}", day2("example.txt"));
-    println!("GOLD: The solution is : {}", day2("input.txt"));
+    println!("SILVER: The example result is : {}", silver("example.txt"));
+    println!("SILVER: The result is : {}", silver("input.txt"));
+    println!("GOLD: The example result is : {}", gold("example.txt"));
+    println!("GOLD: The result is : {}", gold("input.txt"));
 }
 
 type Round = (HashSet<u32>, HashSet<u32>);
@@ -29,7 +29,7 @@ fn read(loc: &str) -> Vec<Round> {
         .collect()
 }
 
-fn day1(loc: &str) -> usize {
+fn silver(loc: &str) -> usize {
     read(loc)
         .iter()
         .map(|(win, have)| {
@@ -43,7 +43,7 @@ fn day1(loc: &str) -> usize {
         .sum()
 }
 
-fn day2(loc: &str) -> usize {
+fn gold(loc: &str) -> usize {
     let rounds = read(loc);
     let mut cards = vec![1; rounds.len()];
 

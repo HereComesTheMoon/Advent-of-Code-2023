@@ -1,9 +1,9 @@
 fn main() {
     println!("Hello, world!");
-    println!("SILVER: The example solution is : {}", day1("example.txt"));
-    println!("SILVER: The solution is : {}", day1("input.txt"));
-    println!("GOLD: The example solution is : {}", day2("example.txt"));
-    println!("GOLD: The solution is : {}", day2("input.txt"));
+    println!("SILVER: The example result is : {}", silver("example.txt"));
+    println!("SILVER: The result is : {}", silver("input.txt"));
+    println!("GOLD: The example result is : {}", gold("example.txt"));
+    println!("GOLD: The result is : {}", gold("input.txt"));
 }
 
 fn read(loc: &str) -> Vec<String> {
@@ -50,22 +50,19 @@ fn get_digit_value(line: String) -> u64 {
 
 fn get_number_value(line: String) -> u64 {
     let mut it = (0..line.len()).filter_map(|k| get_number(&line[k..]));
-    if it.clone().peekable().peek().is_none() {
-        println!("{line}");
-    }
     let first = it.next().unwrap();
 
     10 * first + it.last().unwrap_or(first)
 }
 
-fn day1(loc: &str) -> u64 {
+fn silver(loc: &str) -> u64 {
     read(loc)
         .into_iter()
         .map(|line| get_digit_value(line))
         .sum()
 }
 
-fn day2(loc: &str) -> u64 {
+fn gold(loc: &str) -> u64 {
     read(loc)
         .into_iter()
         .map(|line| get_number_value(line))

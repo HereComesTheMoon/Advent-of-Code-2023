@@ -6,15 +6,12 @@ fn main() {
         b: 14,
     };
     println!(
-        "SILVER: The example solution is : {}",
-        day1("test1.txt", given)
+        "SILVER: The example result is : {}",
+        silver("test1.txt", given)
     );
-    println!("SILVER: The solution is : {}", day1("input.txt", given));
-    println!(
-        "GOLD: The example solution is : {}",
-        day2("test1.txt", given)
-    );
-    println!("GOLD: The solution is : {}", day2("input.txt", given));
+    println!("SILVER: The result is : {}", silver("input.txt", given));
+    println!("GOLD: The example result is : {}", gold("test1.txt", given));
+    println!("GOLD: The result is : {}", gold("input.txt", given));
 }
 
 #[derive(Clone, Copy)]
@@ -84,7 +81,7 @@ fn read(loc: &str) -> Vec<Game> {
         .collect()
 }
 
-fn day1(loc: &str, given: Cubes) -> u64 {
+fn silver(loc: &str, given: Cubes) -> u64 {
     let Cubes { r, b, g } = given;
     read(loc)
         .into_iter()
@@ -94,7 +91,7 @@ fn day1(loc: &str, given: Cubes) -> u64 {
         .sum()
 }
 
-fn day2(loc: &str, given: Cubes) -> u64 {
+fn gold(loc: &str, given: Cubes) -> u64 {
     let Cubes { r, b, g } = given;
     read(loc)
         .into_iter()
