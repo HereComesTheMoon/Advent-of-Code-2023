@@ -2,11 +2,9 @@ fn main() {
     println!("Hello, world!");
     println!("SILVER: The example result is : {}", silver("test.txt"));
     println!("SILVER: The result is : {}", silver("input.txt"));
-    // println!("GOLD: The example result is : {}", gold("test.txt"));
-    // println!("GOLD: The example result is : {}", gold("input.txt"));
+    println!("GOLD: The example result is : {}", gold("test.txt"));
+    println!("GOLD: The result is : {}", gold("input.txt"));
 }
-
-// 10:20
 
 fn read(loc: &str) -> Vec<Vec<i64>> {
     std::fs::read_to_string(loc)
@@ -42,6 +40,16 @@ fn extrapolate(diffs: &mut Vec<Vec<i64>>) -> i64 {
     *diffs.first().unwrap().last().unwrap()
 }
 
+fn extrapolate_backwards(diffs: &mut Vec<Vec<i64>>) -> i64 {
+    diffs.last_mut().unwrap().push(0);
+    for k in (0..diffs.len()-1).rev() {
+        let val = diffs[k].last().unwrap() - diffs[k+1].last().unwrap();
+        diffs[k].push(val);
+    }
+
+    *diffs.first().unwrap().last().unwrap()
+}
+
 fn silver(loc: &str) -> i64 {
     read(loc)
         .into_iter()
@@ -49,3 +57,18 @@ fn silver(loc: &str) -> i64 {
         .map(|mut diffs| extrapolate(&mut diffs))
         .sum()
 }
+
+fn gold(loc: &str) -> i64 {
+    let mut all_diffs: Vec<_> = read(loc)
+        .into_iter()
+        .map(|seq| generate_diffs(seq)).collect();
+    for diffs in all_diffs.iter_mut() {
+        for diff in diffs.iter_mut() {
+            diff.reverse();
+        }
+    }
+    all_diffs.into_iter()
+        .map(|mut diffs| extrapolate_backwards(&mut diffs))
+        .sum()
+}
+
